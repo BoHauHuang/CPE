@@ -55,13 +55,11 @@ BigString operator-(const BigString &s1, const BigString &s2){
 }
 
 void BigString::replace(const BigString &s1,const BigString &s2){
-	char *rep_str;
-	rep_str = strstr(str, s1.str);
-	strncpy(rep_str,s2.str,s2.len);
-	rep_str = strstr(str, s1.str);
-	while(rep_str != ""){
-		rep_str = strstr(str, s1.str);
-		strncpy(rep_str,s2.str,s2.len);
+	char *ans;
+	for(int i = 0 ; i < this->len ; i++){
+		for(int j = 0 ; j < s2.len ; j++){
+			if(this->str[i+j] != s2.str)
+		}
 	}
 }
 
@@ -75,7 +73,7 @@ int main(){
 	cout<<b.show()<<endl;
 	cout<<c.show()<<endl;
 	cout<<d.show()<<endl;
-	e = a+b;
+	a.replace(c,b);
 	cout << e.show()<<endl;
 	//e = e-c;
 	//cout<<e.show()<<endl;
