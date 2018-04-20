@@ -55,26 +55,43 @@ BigString operator-(const BigString &s1, const BigString &s2){
 }
 
 void BigString::replace(const BigString &s1,const BigString &s2){
-	char *ans;
-	for(int i = 0 ; i < this->len ; i++){
-		for(int j = 0 ; j < s2.len ; j++){
-			if(this->str[i+j] != s2.str)
+	BigString ans;
+	int new_length = 0, j;
+	for(int i = 0 ; i < this->len ;){
+		bool same = true;
+		for(j = 0 ; j < s1.len ; j++){
+			if(this->str[i+j] != s1.str[j]) same = false;
+		}
+		
+		if(!same){
+			ans.str[new_length++] = str[i++];
+			cout << "not same : " << ans.str << endl;
+		}
+		if(same){
+			for(int k = 0 ; k < s2.len ; k++) 
+				ans.str[new_length++] = s2.str[k];
+			i += s1.len-1;
+			cout << "same replace : " << ans.str << endl;
 		}
 	}
+	
+	this->str = new char[new_length];
+	strcpy(str,ans.str);
+	
 }
 
 int main(){
 	BigString a,b,c,d,e;
 	a.set("OOPOOP");
-	b.set("PROBLEM");
-	c.set("OP");
+	b.set("AA");
+	c.set("OO");
 	d.set("O");
 	cout<<a.show()<<endl; 
 	cout<<b.show()<<endl;
 	cout<<c.show()<<endl;
 	cout<<d.show()<<endl;
 	a.replace(c,b);
-	cout << e.show()<<endl;
+	cout << "After replace : " << a.show()<<endl;
 	//e = e-c;
 	//cout<<e.show()<<endl;
 	//c.set("Q_Q");
